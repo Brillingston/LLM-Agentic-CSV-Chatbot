@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🤖 LLM Agentic CSV Chatbot
 
 <div align="center">
@@ -300,3 +301,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 ⭐ Star this repo if you found it helpful!
 
 </div>
+=======
+# LLM-Agentic-CSV-Chatbot
+An intelligent, fully agentic AI-powered chatbot that lets you have natural conversations with any CSV dataset — no code required.*
+>>>>>>> 7be0b15ab7b31380a5f7f0ee3f12982c975d84af
