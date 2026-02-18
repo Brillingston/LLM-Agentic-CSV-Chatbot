@@ -27,8 +27,10 @@ streamlit>=1.32.0
 # ------------------------------------------------------------
 #  🐼 DATA PROCESSING
 #  Pandas — CSV parsing, filtering, aggregation
+#  NumPy — numerical operations for quality checks
 # ------------------------------------------------------------
 pandas>=2.0.0
+numpy>=1.24.0
 
 
 # ------------------------------------------------------------
@@ -44,6 +46,14 @@ groq>=0.9.0
 #  python-dotenv — loads GROQ_API_KEY from .env file
 # ------------------------------------------------------------
 python-dotenv>=1.0.0
+
+
+# ------------------------------------------------------------
+#  📊 DATA VISUALIZATION
+#  Plotly — interactive charts for auto-visualization
+#  Used for: bar charts, line charts, pie charts, dashboards
+# ------------------------------------------------------------
+plotly>=5.18.0
 
 
 # ------------------------------------------------------------

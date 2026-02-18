@@ -19,11 +19,11 @@ def build_messages(df: pd.DataFrame, question: str, chat_history: list) -> list:
     """
     Build the messages array for Groq chat completion.
     Includes system context, chat history, and current question.
+    NOTE: Filters out chart messages as they can't be sent to the LLM.
     """
     col_info = get_column_info(df)
     csv_data = dataframe_to_string(df)
 
-    # System message with full CSV context
     system_message = f"""You are an intelligent data analyst assistant.
 You have been given a CSV dataset to analyze and answer questions about.
 
@@ -47,16 +47,27 @@ Answer the user's question clearly and accurately based ONLY on the data above.
 - If the question cannot be answered from this data, say so politely.
 - Format your response in a clean, readable way.
 - Use markdown formatting where helpful (tables, bullet points, bold text).
+
+**IMPORTANT FOR VISUALIZATION**: 
+When answering questions about trends, comparisons, or distributions, structure your 
+response with clear "Label: Value" pairs on separate lines. This enables auto-visualization.
+
+Example:
+Q1: 125000
+Q2: 189000
+Q3: 234000
 """
 
     messages = [{"role": "system", "content": system_message}]
 
-    # Add prior chat history
+    # Add prior chat history - BUT SKIP CHART MESSAGES
     for msg in chat_history:
-        messages.append({
-            "role": "user" if msg["role"] == "user" else "assistant",
-            "content": msg["content"]
-        })
+        # Only include user and model messages, skip chart messages
+        if msg["role"] in ["user", "model"]:
+            messages.append({
+                "role": "user" if msg["role"] == "user" else "assistant",
+                "content": msg["content"]
+            })
 
     # Add current question
     messages.append({"role": "user", "content": question})
@@ -77,6 +88,7 @@ def ask_question(df: pd.DataFrame, question: str, chat_history: list) -> str:
     """
     Send a question to Groq LLM with full CSV context.
     Automatically falls back to next model if one fails.
+    Filters out chart messages from history to prevent API errors.
     """
     try:
         client = get_client()
