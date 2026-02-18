@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# 🤖 LLM Agentic CSV Chatbot
+# 🤖 LLM Agentic CSV Chatbot Pro
 
 <div align="center">
 
@@ -7,12 +6,13 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 ![Groq](https://img.shields.io/badge/Groq-AI-F55036?style=for-the-badge&logo=groq&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge)
 
-**An intelligent, fully agentic AI-powered chatbot that lets you have natural conversations with any CSV dataset — no code required.**
+**An intelligent, production-grade AI-powered data analysis platform that transforms CSV exploration into natural conversations — with automatic visualizations, quality checks, and live dashboards.**
 
-[Features](#-features) • [Demo](#-demo) • [Installation](#-installation) • [Usage](#-usage) • [Tech Stack](#-tech-stack) • [Project Structure](#-project-structure) • [Contributing](#-contributing)
+[Features](#-features) • [Demo](#-demo) • [Installation](#-installation) • [Usage](#-usage) • [Tech Stack](#-tech-stack) • [What's New](#-whats-new-v20) • [Contributing](#-contributing)
 
 </div>
 
@@ -20,64 +20,98 @@
 
 ## 🌟 Overview
 
-The **LLM Agentic CSV Chatbot** transforms the way you interact with data. Instead of writing complex SQL queries or pandas code, simply upload your CSV and ask questions in plain English. The AI understands your intent, analyzes the dataset, and returns clear, human-readable answers — just like talking to a data analyst.
+The **LLM Agentic CSV Chatbot Pro** revolutionizes data exploration. Upload any CSV and interact with it naturally — no SQL, no pandas code, no complex syntax. Ask questions in plain English and get:
 
-Whether you're an educator reviewing student records, an analyst exploring sales data, or a developer prototyping a data product — this tool makes CSV exploration effortless and intelligent.
+- 📊 **Instant answers** from ultra-fast AI (Groq LLMs)
+- 📈 **Auto-generated charts** when visualizations enhance understanding
+- 🛡️ **Quality reports** highlighting data issues before analysis
+- 📊 **Live dashboards** with KPIs, distributions, and correlations
+- 💬 **Multi-turn conversations** with full context retention
+
+Whether you're analyzing student records, sales data, customer logs, or any tabular dataset — this tool makes exploration effortless and intelligent.
 
 ```
-User: "List all students in Year 3 with CGPA above 8.5"
+User: "Which student has the highest CGPA?"
   ↓
-AI:  Here are the students in Year 3 with CGPA above 8.5:
-     | Name    | Year | Department | CGPA |
-     |---------|------|------------|------|
-     | Alice   |  3   | AI & DS    | 9.1  |
-     | Charlie |  3   | AI & DS    | 8.7  |
-     Total: 2 students found.
+AI:  Meera Nair has the highest CGPA of 9.77
+     [Auto-generated bar chart comparing all students]
 ```
 
 ---
 
 ## ✨ Features
 
+### 🚀 Core Features
+
 | Feature | Description |
 |--------|-------------|
-| 📂 **CSV Upload** | Drag-and-drop any CSV file and instantly preview your data |
-| 💬 **Natural Language Queries** | Ask questions in plain English — no SQL or code needed |
-| 🧠 **Agentic AI Engine** | Powered by Groq's ultra-fast LLMs (Llama 3.3, Mixtral) |
-| 🔍 **Smart Filtering** | "Show all employees in Sales earning above $60k" |
-| 🔢 **Auto Counting** | "How many students are in Year 2?" |
-| 📊 **Summarization** | "Give me a summary of this dataset" |
-| 📈 **Calculations** | "What is the average CGPA by department?" |
-| 🔄 **Multi-turn Chat** | Remembers conversation context across multiple questions |
-| 🔎 **Live Data Filter** | Real-time search/filter across the full dataset in the UI |
-| ⬇️ **CSV Export** | Download the filtered or full dataset anytime |
-| ⚡ **Blazing Fast** | Groq's LPU inference delivers sub-second AI responses |
-| 🔁 **Model Fallback** | Automatically switches models if rate limits are hit |
+| 📂 **Instant CSV Upload** | Drag-and-drop any CSV file and see your data immediately |
+| 💬 **Natural Language Queries** | Ask questions in plain English — no technical syntax needed |
+| 🧠 **Powered by Groq** | Lightning-fast responses using Llama 3.3 70B model |
+| 🔍 **Smart Filtering & Sorting** | "Show top 10 customers by revenue" |
+| 🔢 **Aggregations & Calculations** | "What's the average salary by department?" |
+| 📊 **Multi-turn Context** | Follow-up questions remember previous context |
+| 🔎 **Real-time Data Search** | Live filter across all columns in the UI |
+| ⬇️ **CSV Export** | Download filtered or full datasets anytime |
+
+### ✨ Advanced Features (v2.0)
+
+| Feature | Description | Benefit |
+|--------|-------------|---------|
+| 📊 **Auto Visualization** | AI automatically generates charts for trends/comparisons | Visual insights without manual chart creation |
+| 🛡️ **Data Quality Checks** | Instant detection of missing values, duplicates, outliers | Catch issues before analysis begins |
+| 📈 **Live Dashboard** | Interactive KPI cards + 6 chart types auto-generated | Instant overview of your entire dataset |
+| 📉 **Statistical Analysis** | Box plots, correlation heatmaps, summary statistics | Deep insights into data distributions |
+| 🎨 **Professional UI** | Color-coded health scores, gradient KPI cards | Production-ready interface |
 
 ---
 
 ## 🎬 Demo
 
-### Upload & Chat
+### Conversation with Auto-Visualization
 ```
-1. Upload students.csv
-2. Ask: "How many students are there in total?"
-   → "There are 7 students in total."
+1. Upload students.csv (100 rows)
 
-3. Ask: "Show names and CGPA of AI & DS students"
-   → Lists all AI & DS students with their CGPAs in a clean table.
+2. Q: "Which student has the highest CGPA?"
+   → "Meera Nair has the highest CGPA of 9.77"
+   → [Auto-generated bar chart showing top 10 students]
 
-4. Ask: "Who has the highest CGPA?"
-   → "Eve from CSE has the highest CGPA of 9.3"
+3. Q: "Show me the trend of average CGPA by year"
+   → "Here's the average CGPA by year..."
+   → [Auto-generated line chart showing trend]
+
+4. Q: "What percentage of students have CGPA above 8?"
+   → "45% of students (45 out of 100) have CGPA above 8"
+   → [Auto-generated pie chart showing distribution]
 ```
 
-### Supported Query Types
-- ✅ Filtering — *"List all records where Department is ECE"*
-- ✅ Counting — *"How many rows match Year = 3?"*
-- ✅ Aggregation — *"What is the average, min, and max CGPA?"*
-- ✅ Sorting — *"Show top 5 students by CGPA"*
-- ✅ Summarizing — *"Give me a full summary of this data"*
-- ✅ Multi-column — *"Show Name, Department and CGPA for Year 1 students"*
+### Quality Report Example
+```
+📊 Data Quality Report
+Overall Health: Fair 🟡
+
+✅ Passed Checks:
+- No duplicate rows detected
+- All column names are valid
+
+⚠️ Warnings:
+- Email: 23 missing values (15%)
+- Revenue: 2 outliers detected (e.g., $999,999)
+
+💡 Recommendations:
+- Consider handling missing values before analysis
+- Investigate outlier revenue values
+```
+
+### Live Dashboard
+Automatically shows:
+- 📊 4 KPI cards (Total Records, Columns, Missing Values, Health Score)
+- 📈 Data type distribution pie chart
+- 📊 Missing values bar chart
+- 📉 Numeric columns box plots
+- 🎯 Top categories bar chart
+- 🔗 Correlation heatmap
+- 📋 Summary statistics table
 
 ---
 
@@ -85,20 +119,20 @@ AI:  Here are the students in Year 3 with CGPA above 8.5:
 
 ### Prerequisites
 
-- Python **3.9 or higher**
-- A free **Groq API Key** — get one at [console.groq.com/keys](https://console.groq.com/keys)
+- **Python 3.9+** ([Download](https://python.org))
+- **Groq API Key** (Free) — [Get yours here](https://console.groq.com/keys)
 
-### Step-by-Step Setup
+### Quick Start (5 minutes)
 
 **1. Clone or download the project**
 ```bash
-git clone https://github.com/yourusername/csv-chatbot.git
+git clone https://github.com/yourusername/csv-chatbot-pro.git
 cd csv_chatbot
 ```
 
-**2. Create and activate a virtual environment**
+**2. Create virtual environment**
 ```bash
-# Create virtual environment
+# Create environment
 python -m venv venv
 
 # Activate — Windows
@@ -108,29 +142,24 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-**3. Upgrade pip**
-```bash
-python -m pip install --upgrade pip
-```
-
-**4. Install all dependencies**
+**3. Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
-**5. Configure your API key**
+**4. Configure API key**
 
-Create a `.env` file in the root of the project:
+Create `.env` file in project root:
 ```env
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
-**6. Launch the app**
+**5. Launch the app**
 ```bash
 streamlit run app.py
 ```
 
-The app will open automatically at **http://localhost:8501** 🎉
+App opens at **http://localhost:8501** 🎉
 
 ---
 
@@ -139,25 +168,20 @@ The app will open automatically at **http://localhost:8501** 🎉
 ```
 csv_chatbot/
 │
-├── 📄 app.py                  ← Main Streamlit application & UI
-├── 📄 requirements.txt        ← Python dependencies
-├── 📄 .env                    ← API key configuration (you create this)
-├── 📄 README.md               ← Project documentation
+├── 📄 app.py                      ← Main Streamlit application (enhanced v2.0)
+├── 📄 requirements.txt            ← Python dependencies
+├── 📄 .env                        ← API key configuration
+├── 📄 README.md                   ← This file
+├── 📄 INSTALLATION_GUIDE.md       ← Detailed setup instructions
 │
 └── 📁 utils/
-    ├── 📄 __init__.py         ← Package initializer
-    ├── 📄 csv_handler.py      ← CSV loading, parsing & summarization
-    └── 📄 llm_agent.py        ← Groq LLM integration & prompt engineering
+    ├── 📄 __init__.py             ← Package initializer
+    ├── 📄 csv_handler.py          ← CSV loading & data processing
+    ├── 📄 llm_agent.py            ← Groq LLM integration & prompting
+    ├── 📄 visualizer.py           ← Auto-visualization engine (NEW ✨)
+    ├── 📄 data_quality.py         ← Quality checks & validation (NEW ✨)
+    └── 📄 dashboard.py            ← Live dashboard generation (NEW ✨)
 ```
-
-### File Responsibilities
-
-| File | Responsibility |
-|------|---------------|
-| `app.py` | Streamlit UI, session state, chat display, tab layout |
-| `utils/csv_handler.py` | CSV loading, column profiling, data-to-string conversion |
-| `utils/llm_agent.py` | Groq client, prompt building, model fallback logic |
-| `.env` | Stores `GROQ_API_KEY` securely outside source code |
 
 ---
 
@@ -166,68 +190,135 @@ csv_chatbot/
 | Technology | Version | Purpose |
 |-----------|---------|---------|
 | **Python** | 3.9+ | Core programming language |
-| **Streamlit** | Latest | Web UI framework |
-| **Groq SDK** | Latest | LLM API client |
-| **Pandas** | Latest | CSV parsing & data manipulation |
-| **python-dotenv** | Latest | Environment variable management |
-| **openpyxl** | Latest | Excel file compatibility |
+| **Streamlit** | 1.32+ | Web UI framework for rapid prototyping |
+| **Groq SDK** | 0.9+ | Ultra-fast LLM API client |
+| **Pandas** | 2.0+ | CSV parsing & data manipulation |
+| **NumPy** | 1.24+ | Numerical operations for quality checks |
+| **Plotly** | 5.18+ | Interactive charts & visualizations |
+| **python-dotenv** | 1.0+ | Environment variable management |
+| **openpyxl** | 3.1+ | Excel file compatibility |
 
-### AI Models Used (via Groq)
+### AI Models (via Groq)
 
-| Model | Use Case | Context Window |
-|-------|----------|---------------|
-| `llama-3.3-70b-versatile` | Primary — best accuracy | 128K tokens |
-| `llama3-8b-8192` | Fallback — lightweight | 8K tokens |
-| `mixtral-8x7b-32768` | Fallback — large context | 32K tokens |
-| `gemma2-9b-it` | Final fallback | 8K tokens |
+| Model | Use Case | Context | Speed |
+|-------|----------|---------|-------|
+| `llama-3.3-70b-versatile` | Primary — best accuracy | 128K tokens | ⚡⚡⚡ Ultra-fast |
+| `llama3-8b-8192` | Fallback — lightweight | 8K tokens | ⚡⚡⚡ Very fast |
+| `mixtral-8x7b-32768` | Fallback — large context | 32K tokens | ⚡⚡ Fast |
+| `gemma2-9b-it` | Final fallback | 8K tokens | ⚡⚡ Fast |
+
+---
+
+## 🎯 What's New (v2.0)
+
+### 🆕 Three Game-Changing Features
+
+#### 1. 📊 Auto-Visualization Engine
+**What it does:** AI detects when charts would enhance answers and generates them automatically
+
+**Example:**
+```
+Q: "Show revenue by quarter"
+→ Text answer + auto-generated bar chart
+
+Q: "What's the trend over time?"
+→ Analysis + auto-generated line chart
+```
+
+**Supported chart types:**
+- Bar charts (comparisons)
+- Line charts (trends)
+- Pie charts (distributions)
+- Scatter plots (correlations)
+
+---
+
+#### 2. 🛡️ Data Quality Alerts
+**What it does:** Scans uploaded CSV and reports issues instantly
+
+**7 Quality Checks:**
+- ✅ Missing values detection
+- ✅ Duplicate rows & IDs
+- ✅ Statistical outliers (z-score)
+- ✅ Date format validation
+- ✅ Email/phone format validation
+- ✅ Column name issues
+- ✅ Overall health scoring (Good/Fair/Poor)
+
+**Benefits:**
+- Catch data issues before analysis
+- Understand data quality at a glance
+- Get actionable recommendations
+
+---
+
+#### 3. 📈 Live Dashboard
+**What it does:** Auto-generates comprehensive analytics dashboard
+
+**Includes:**
+- 4 KPI cards with key metrics
+- Data type distribution (pie chart)
+- Missing values analysis (bar chart)
+- Numeric distributions (box plots)
+- Category frequencies (bar chart)
+- Correlation matrix (heatmap)
+- Summary statistics (table)
+
+**Benefits:**
+- Instant overview of entire dataset
+- No manual dashboard creation needed
+- Interactive Plotly charts
+- Professional presentation-ready
 
 ---
 
 ## 💡 Usage Guide
 
-### Asking Good Questions
+### Asking Effective Questions
 
-| Question Type | Example |
-|--------------|---------|
-| Count | *"How many students have CGPA above 9?"* |
-| Filter | *"List all employees in the Marketing department"* |
-| Sort | *"Show the top 10 products by revenue"* |
-| Average | *"What is the average salary by department?"* |
-| Summary | *"Give me an overview of this dataset"* |
-| Specific column | *"Show only Name and Email columns"* |
-| Conditional | *"Who joined after January 2023?"* |
+| Question Type | Example | Result |
+|--------------|---------|--------|
+| **Count** | *"How many students have CGPA above 9?"* | Exact count + percentage |
+| **Filter** | *"List all employees in Marketing"* | Filtered table |
+| **Sort** | *"Show top 10 products by revenue"* | Sorted results + chart |
+| **Average** | *"What is average salary by department?"* | Aggregated data + chart |
+| **Trend** | *"Show sales over the last 6 months"* | Analysis + line chart |
+| **Compare** | *"Compare Q1 vs Q2 revenue"* | Comparison + bar chart |
+| **Distribution** | *"What's the breakdown by category?"* | Distribution + pie chart |
 
 ### Tips for Best Results
-- Be specific about column names if you know them
-- Ask one question at a time for clearest answers
-- Use follow-up questions — the chatbot remembers context
-- For large datasets, ask targeted questions to avoid token limits
+✅ Be specific about column names when known  
+✅ Ask one clear question at a time  
+✅ Use follow-ups — the AI remembers context  
+✅ For charts, mention trends/comparisons explicitly  
+✅ Check Quality Report tab for data issues first  
 
 ---
 
-## 🧪 Sample CSV to Test With
+## 🧪 Sample Data for Testing
 
-Save this as `students.csv` and upload it to try the app:
+Save this as `sample_students.csv`:
 
 ```csv
-Name,Year,Department,CGPA
-Alice,3,AI & DS,9.1
-Bob,2,CSE,7.8
-Charlie,3,AI & DS,8.5
-Diana,1,ECE,8.9
-Eve,3,CSE,9.3
-Frank,2,AI & DS,7.5
-Grace,1,ECE,9.0
-Henry,2,CSE,8.2
-Iris,1,AI & DS,8.8
-James,3,ECE,7.9
+Student_ID,Name,Age,Department,Year,CGPA,City,Attendance_Percentage
+1,Arjun Kumar,22,CSE,3,8.45,Chennai,85
+2,Priya Sharma,21,AI & DS,2,9.12,Bangalore,92
+3,Rohan Patel,23,ECE,4,7.89,Mumbai,78
+4,Meera Nair,23,ECE,2,9.77,Coimbatore,60
+5,Aditya Singh,20,CSE,1,8.23,Delhi,88
+6,Sneha Reddy,22,AI & DS,3,9.01,Hyderabad,95
+7,Vikram Joshi,21,CSE,2,8.67,Pune,82
+8,Ananya Das,24,ECE,4,7.45,Kolkata,70
+9,Karan Mehta,20,AI & DS,1,8.90,Ahmedabad,91
+10,Divya Iyer,23,CSE,3,9.34,Chennai,89
 ```
 
-**Try asking:**
-- *"How many students are in Year 3?"*
-- *"List all AI & DS students sorted by CGPA"*
-- *"What is the average CGPA per department?"*
-- *"Who are the top 3 students overall?"*
+**Try these queries:**
+1. *"Which student has the highest CGPA?"*
+2. *"Show average CGPA by department"*
+3. *"List students with attendance below 80%"*
+4. *"Compare CGPA across different years"*
+5. *"What's the distribution of students by department?"*
 
 ---
 
@@ -239,7 +330,7 @@ James,3,ECE,7.9
 | `llama3-8b-8192` | Unlimited | 20,000 | 500,000 |
 | `mixtral-8x7b-32768` | Unlimited | 5,000 | 500,000 |
 
-> Groq's free tier is extremely generous. You can run hundreds of queries per day at no cost.
+> Groq's free tier is extremely generous — hundreds of queries daily at no cost with sub-second latency!
 
 ---
 
@@ -248,34 +339,48 @@ James,3,ECE,7.9
 | Error | Cause | Fix |
 |-------|-------|-----|
 | `GROQ_API_KEY not found` | Missing `.env` file | Create `.env` with your key |
-| `401 Unauthorized` | Invalid API key | Check key at console.groq.com |
-| `429 Rate Limited` | Too many requests | App auto-retries with fallback models |
-| `ModuleNotFoundError` | Missing library | Run `pip install -r requirements.txt` |
-| `python not recognized` | Python not in PATH | Reinstall Python, check "Add to PATH" |
-| `venv\Scripts\activate` fails | PowerShell policy | Run `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` |
+| `401 Unauthorized` | Invalid API key | Verify key at console.groq.com |
+| `400 Bad Request` | Chart in conversation history | Update to latest `llm_agent.py` |
+| `ModuleNotFoundError: plotly` | Missing dependency | `pip install plotly` |
+| `ModuleNotFoundError: numpy` | Missing dependency | `pip install numpy` |
+| Charts not displaying | Browser cache | Clear cache and refresh |
+| Bright chat bubbles | Old CSS | Update to latest `app.py` |
 
 ---
 
 ## 🗺️ Roadmap
 
-- [ ] Support for Excel (`.xlsx`) file uploads
-- [ ] Export chat history as PDF report
-- [ ] Data visualization (auto-generate charts from queries)
-- [ ] Multi-file CSV comparison
-- [ ] Support for Google Sheets URLs
-- [ ] User authentication & saved sessions
+- [ ] Excel (.xlsx) file upload support
+- [ ] Export chat as PDF report with charts
+- [ ] Multi-file CSV joins and comparisons
+- [ ] Voice query input (speech-to-text)
+- [ ] SQL query generation and display
+- [ ] Database connection support (PostgreSQL, MySQL)
+- [ ] Scheduled data refresh for live dashboards
+- [ ] Collaborative sharing with teams
+- [ ] Custom dashboard templates
+- [ ] ML-powered predictions and forecasting
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Here's how you can help:
 
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+**Contribution Ideas:**
+- Add new chart types (histogram, waterfall, etc.)
+- Implement additional quality checks
+- Create dashboard templates
+- Add export formats (PDF, Excel with charts)
+- Improve prompt engineering for better AI responses
+- Add unit tests
+- Create demo videos
 
 ---
 
@@ -287,21 +392,42 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ## 🙏 Acknowledgements
 
-- [Groq](https://groq.com) — For blazing fast LLM inference
+- [Groq](https://groq.com) — For revolutionary LPU-powered AI inference
 - [Streamlit](https://streamlit.io) — For the elegant web framework
 - [Meta AI](https://ai.meta.com) — For the Llama 3.3 model
-- [Pandas](https://pandas.pydata.org) — For powerful data handling
+- [Plotly](https://plotly.com) — For beautiful interactive visualizations
+- [Pandas](https://pandas.pydata.org) — For powerful data manipulation
+
+---
+
+## 📊 Project Stats
+
+- **Lines of Code:** ~1,500
+- **Files:** 8 Python files
+- **Features:** 15+ major features
+- **Dependencies:** 8 packages
+- **Charts Generated:** 8 types
+- **Quality Checks:** 7 automated tests
+
+---
+
+## 📞 Support & Contact
+
+- **Issues:** [GitHub Issues](https://github.com/yourusername/csv-chatbot-pro/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/yourusername/csv-chatbot-pro/discussions)
+- **Email:** your.email@example.com
 
 ---
 
 <div align="center">
 
-**Built with ❤️ using Python, Streamlit & Groq**
+**Built with ❤️ using Python, Streamlit, Groq & Plotly**
 
 ⭐ Star this repo if you found it helpful!
 
+[![GitHub stars](https://img.shields.io/github/stars/yourusername/csv-chatbot-pro?style=social)](https://github.com/yourusername/csv-chatbot-pro)
+[![GitHub forks](https://img.shields.io/github/forks/yourusername/csv-chatbot-pro?style=social)](https://github.com/yourusername/csv-chatbot-pro)
+
+[Report Bug](https://github.com/yourusername/csv-chatbot-pro/issues) • [Request Feature](https://github.com/yourusername/csv-chatbot-pro/issues) • [View Demo](#-demo)
+
 </div>
-=======
-# LLM-Agentic-CSV-Chatbot
-An intelligent, fully agentic AI-powered chatbot that lets you have natural conversations with any CSV dataset — no code required.*
->>>>>>> 7be0b15ab7b31380a5f7f0ee3f12982c975d84af
