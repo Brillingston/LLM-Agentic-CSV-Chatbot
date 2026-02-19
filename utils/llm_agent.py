@@ -76,12 +76,12 @@ Q3: 234000
     return messages
 
 
-# Groq models to try in order (all free tier)
+# Groq models to try in order (all currently supported)
 MODELS_TO_TRY = [
-    "llama-3.3-70b-versatile",   # Best quality, very fast
-    "llama3-8b-8192",            # Lightweight fallback
-    "mixtral-8x7b-32768",        # Large context fallback
-    "gemma2-9b-it",              # Google Gemma fallback
+    "llama-3.3-70b-versatile",   # Best quality, very fast (primary)
+    "llama-3.1-8b-instant",      # Fast lightweight model (replacement for llama3-8b-8192)
+    "mixtral-8x7b-32768",        # Large context window
+    "gemma2-9b-it",              # Google Gemma alternative
 ]
 
 
