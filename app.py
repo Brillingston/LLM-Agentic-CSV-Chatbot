@@ -94,6 +94,46 @@ st.markdown("""
         font-weight: bold;
         font-size: 1.1rem;
     }
+    /* Styling for HTML tables to look like dataframes */
+    .dataframe-container {
+        max-height: 600px;
+        overflow-y: auto;
+        overflow-x: auto;
+        margin: 1rem 0;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 1rem 0;
+        font-size: 0.9rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    table thead tr {
+        background-color: #667eea;
+        color: white;
+        text-align: left;
+        font-weight: bold;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    table th, table td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+    }
+    table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+    table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+    table tbody tr:hover {
+        background-color: #e3f2fd;
+        cursor: pointer;
+    }
+    table tbody tr:last-of-type {
+        border-bottom: 2px solid #667eea;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -223,6 +263,22 @@ if st.session_state.df is not None:
                         unsafe_allow_html=True
                     )
                     st.markdown(msg["content"])
+                    
+                    # Display metadata if available
+                    if msg.get("metadata"):
+                        import json
+                        with st.expander("📊 View Metadata (JSON)", expanded=False):
+                            st.json(msg["metadata"])
+                            
+                            # Also provide download option
+                            json_str = json.dumps(msg["metadata"], indent=2)
+                            st.download_button(
+                                label="💾 Download Metadata JSON",
+                                data=json_str,
+                                file_name=f"metadata_{msg['metadata'].get('timestamp', 'unknown')}.json",
+                                mime="application/json",
+                                key=f"download_meta_{id(msg)}"
+                            )
         else:
             st.info("👋 Start by asking a question about your data below!")
 
@@ -256,11 +312,15 @@ if st.session_state.df is not None:
 
         if ask_clicked and user_question.strip():
             with st.spinner("🤔 Groq AI is thinking..."):
-                response = ask_question(
+                result = ask_question(
                     df=df,
                     question=user_question,
                     chat_history=st.session_state.chat_history
                 )
+                
+                # Extract response and metadata
+                response = result["response"]
+                metadata = result.get("metadata")
 
             # Save to history
             st.session_state.chat_history.append({
@@ -269,7 +329,8 @@ if st.session_state.df is not None:
             })
             st.session_state.chat_history.append({
                 "role": "model",
-                "content": response
+                "content": response,
+                "metadata": metadata  # Store metadata with the response
             })
             
             # Try to auto-generate visualization
@@ -339,7 +400,15 @@ if st.session_state.df is not None:
         # Summary Statistics Table
         st.subheader("📈 Summary Statistics")
         stats_df = generate_summary_stats(df)
-        st.dataframe(stats_df, use_container_width=True)
+        
+        # Use pure HTML instead of st.table to avoid PyArrow completely
+        if len(stats_df) > 0 and 'Message' not in stats_df.columns:
+            st.markdown(
+                f'<div class="dataframe-container">{stats_df.to_html(index=True)}</div>',
+                unsafe_allow_html=True
+            )
+        else:
+            st.info("No numeric columns available for summary statistics")
 
     # ── Tab 3: Data Preview ──────────────────
     with tab3:
@@ -352,9 +421,21 @@ if st.session_state.df is not None:
             ).any(axis=1)
             filtered_df = df[mask]
             st.write(f"Found **{len(filtered_df)}** matching rows:")
-            st.dataframe(filtered_df, use_container_width=True)
+            # Use HTML rendering instead of st.dataframe to avoid PyArrow
+            st.markdown(
+                f'<div class="dataframe-container">{filtered_df.head(100).to_html(index=False)}</div>',
+                unsafe_allow_html=True
+            )
+            if len(filtered_df) > 100:
+                st.info(f"Showing first 100 of {len(filtered_df)} rows")
         else:
-            st.dataframe(df, use_container_width=True)
+            # Use HTML rendering instead of st.dataframe to avoid PyArrow
+            st.markdown(
+                f'<div class="dataframe-container">{df.head(100).to_html(index=False)}</div>',
+                unsafe_allow_html=True
+            )
+            if len(df) > 100:
+                st.info(f"Showing first 100 of {len(df)} rows")
 
         csv_bytes = df.to_csv(index=False).encode("utf-8")
         st.download_button(

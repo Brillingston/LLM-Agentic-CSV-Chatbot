@@ -23,15 +23,31 @@ def get_csv_summary(df: pd.DataFrame) -> dict:
     return summary
 
 
-def dataframe_to_string(df: pd.DataFrame, max_rows: int = 200) -> str:
-    """Convert DataFrame to a readable string for the LLM context."""
-    if len(df) > max_rows:
-        preview = df.head(max_rows)
-        note = f"\n[Note: Showing first {max_rows} of {len(df)} rows]"
-    else:
-        preview = df
-        note = ""
-    return preview.to_string(index=False) + note
+def dataframe_to_string(df: pd.DataFrame, max_rows: int = 50) -> str:
+    """
+    Convert DataFrame to a readable string for the LLM context.
+    Uses intelligent sampling to show data variety within token limits.
+    IMPORTANT: Reduced to 50 rows max to prevent token limit errors.
+    """
+    if len(df) <= max_rows:
+        # Small dataset - show all
+        return df.to_string(index=False)
+    
+    # Large dataset - smart sampling
+    sample_size = max_rows // 2
+    
+    # Take first few rows
+    head_df = df.head(sample_size)
+    
+    # Take last few rows  
+    tail_df = df.tail(sample_size)
+    
+    # Combine with separator
+    result = head_df.to_string(index=False)
+    result += f"\n\n... [{len(df) - max_rows} rows omitted for brevity] ...\n\n"
+    result += tail_df.to_string(index=False)
+    
+    return result
 
 
 def get_column_info(df: pd.DataFrame) -> str:
@@ -48,9 +64,11 @@ def get_column_info(df: pd.DataFrame) -> str:
                 f"min={df[col].min()}, max={df[col].max()}, mean={df[col].mean():.2f}"
             )
         else:
-            sample_vals = df[col].dropna().unique()[:5].tolist()
+            # Limit sample values to 3 to save tokens
+            sample_vals = df[col].dropna().unique()[:3].tolist()
             info_lines.append(
                 f"- {col} ({dtype}): {non_null} non-null, {unique} unique, "
-                f"sample values: {sample_vals}"
+                f"sample: {sample_vals}"
             )
+
     return "\n".join(info_lines)
